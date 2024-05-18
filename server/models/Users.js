@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const UsersSchema = new mongoose.Schema({
   cedula: {
+    unique: true,
     type: Number,
     required: true,
-    max: 10
+    maxlength: 10
   },
   nombre: {
     type: String,
@@ -15,7 +16,7 @@ const UsersSchema = new mongoose.Schema({
   },
   telefono: {
     type: Number,
-    max: 10
+    maxlength: 10
   },
   salarioMensual: {
     type: Number,

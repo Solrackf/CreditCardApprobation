@@ -11,7 +11,7 @@ const CardsSchema = new mongoose.Schema({
     required: true,
   },
   fechaExpiracion: {
-    type: Date,
+    type: String,
     required: true,
   },
   franquicia: {
