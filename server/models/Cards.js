@@ -17,6 +17,10 @@ const CardsSchema = new mongoose.Schema({
   franquicia: {
     type: String,
   },
+  cvv: {
+    type: Number,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("Cards", CardsSchema);

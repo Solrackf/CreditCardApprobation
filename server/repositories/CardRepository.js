@@ -21,6 +21,7 @@ function _createDataCard(cedulaUsuario, franquicia) {
   dataCard.cedulaUsuario = cedulaUsuario;
   dataCard.franquicia = franquicia;
   dataCard.fechaExpiracion = _generateFechaExpiracion();
+  dataCard.cvv = _generateCvv();
 
   if (franquicia.toLowerCase() === "visa") {
     dataCard.numero = _generateVisaNumber();
@@ -58,6 +59,11 @@ function _generateFechaExpiracion() {
   const expirationYear = expirationYearFull % 100
   const expirationMonth = Math.floor(Math.random() * 12) + 1;
   return expirationMonth + "/" + expirationYear;
+}
+
+function _generateCvv(){
+  let codCvv = Math.floor(Math.random() * 900) + 100;
+  return codCvv;
 }
 
 module.exports = new CardRepository();
