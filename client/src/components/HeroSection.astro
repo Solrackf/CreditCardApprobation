@@ -1,6 +1,20 @@
-<main>
+---
+import CreditCard from "./CreditCard.astro";
+
+const props = {
+  backgroundSvg: '',
+  backgroundTransparency: '',
+  franchise: '',
+  cardNumber: '',
+  cardholderName: '',
+  expirationDate: '',
+  blurEffect: true,
+}
+---
+
+<main class="w-screen flex">
   <section 
-  class="w-2/4 h-full">
+  class="w-2/4 h-screen">
     <h1 
       class="text-4xl">
         Obtén tu tajeta de crédito con nosotros
@@ -8,5 +22,37 @@
     <a href="">
       Obtener mi tarjeta
     </a>
+  </section>
+  <section
+  class="w-2/4 h-screen">
+  <CreditCard 
+      backgroundSvg="background1.svg"
+      backgroundTransparency="0.7"
+      franchise="MasterCardLogo.svg"
+      cardNumber="1234 5678 9012 3456"
+      cardholderName="John Doe"
+      expirationDate="12/34"
+      blurEffect={false}
+    />
+    
+    <CreditCard 
+      backgroundSvg="background3.svg"
+      backgroundTransparency="0.5"
+      franchise="VisaLogo.svg"
+      cardNumber="9876 5432 1098 7654"
+      cardholderName="Jane Smith"
+      expirationDate="11/33"
+      blurEffect={false}
+    />
+    
+    <CreditCard 
+      backgroundSvg="background2.svg"
+      backgroundTransparency="0.9"
+      franchise="MasterCardLogo.svg"
+      cardNumber="5678 1234 8765 4321"
+      cardholderName="Alice Brown"
+      expirationDate="10/32"
+      blurEffect={true}
+    />
   </section>
 </main>

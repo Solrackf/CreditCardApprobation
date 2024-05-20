@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const usuarioRouter = require('./routes/users');
 
 var app = express();
-const port = 3001
+const port = 3000
 
 //conexion a bd
 connectDB();

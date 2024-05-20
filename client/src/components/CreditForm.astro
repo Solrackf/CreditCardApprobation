@@ -1,0 +1,54 @@
+---
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch('http://localhost:3000/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+---
+
+<form onsubmit={handleSubmit}>
+  <label>
+    Cedula:
+    <input type="text" name="cedula" required />
+  </label>
+  <label>
+    Nombre completo:
+    <input type="text" name="nombreCompleto" required />
+  </label>
+  <label>
+    Correo:
+    <input type="email" name="correo" required />
+  </label>
+  <label>
+    Número de celular:
+    <input type="text" name="numeroCelular" required />
+  </label>
+  <label>
+    Salario mensuales:
+    <input type="number" name="salarioMensuales" required />
+  </label>
+  <label>
+    Otros ingresos:
+    <input type="number" name="otrosIngresos" required />
+  </label>
+  <label>
+    Ingresos totales:
+    <input type="number" name="ingresosTotales" required />
+  </label>
+  <button type="submit">Enviar</button>
+</form>

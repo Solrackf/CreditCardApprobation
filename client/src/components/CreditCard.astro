@@ -1,0 +1,46 @@
+---
+export interface Props {
+  backgroundSvg: string;
+  backgroundTransparency: string;
+  franchise: string;
+  cardNumber: string;
+  cardholderName: string;
+  expirationDate: string;
+  blurEffect: boolean;
+}
+
+const {
+  backgroundSvg,
+  backgroundTransparency,
+  franchise,
+  cardNumber,
+  cardholderName,
+  expirationDate,
+  blurEffect,
+} = Astro.props;
+---
+
+<div
+  class={`p-6 flex flex-col items-center justify-center w-2/4 aspect-[1.586/1] rounded-xl overflow-hidden ${blurEffect ? 'backdrop-blur' : ''}`}
+  style={`background: url(${backgroundSvg}) no-repeat center/cover; background-color: rgba(255, 255, 255, ${backgroundTransparency});`}
+>
+  <section class="flex items-center justify-start w-full h-2/4 ">
+    <img src="LessContactIcon.svg" class="h-5" alt="">
+  </section>
+  <section class="flex items-center justify-start w-full h-1/5 ">
+    <p class="text-lg">{cardNumber}</p>
+  </section>
+  <section class="flex items-center justify-between w-full h-1/4 ">
+    <img src={franchise} alt="Franchise" class="h-8" />
+    <div class="flex flex-col items-end justify-center">
+      <p class="text-sm uppercase">{cardholderName}</p>
+      <p class="text-xs"><span class="font-extrabold">Exp:</span> {expirationDate}</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .aspect-[1.586/1] {
+    padding-bottom: 62.8%;
+  }
+</style>
