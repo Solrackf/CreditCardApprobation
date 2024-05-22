@@ -19,24 +19,25 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&display=swap" rel="stylesheet">
 	</head>
-	<body>
+	<body class="w-screen max-w-[100vw] overflow-x-hidden bg-violet-400">
 		<slot />
 	</body>
 </html>
 <style is:global>
 	:root{
-		--primary-color: #0C0C20;
+		--primary-color: #1E1E1E;
 		--secondary-color: #C6C4C9;
+		--purple-light: #E8E9F9;
 	}
 	*{
 		font-family: "Lato", sans-serif;
-		color: var(--secondary-color);
+		color: var(--primary-color);
 	}
 	.lobster {
 		font-family: "Lobster", sans-serif;
 	}
-	body{
-		background: var(--primary-color);
+	.transparentWhite{
+		background: rgba(0, 0, 0, 0.2) !important;
 	}
 </style>
 

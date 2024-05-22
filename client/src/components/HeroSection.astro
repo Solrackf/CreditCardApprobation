@@ -12,47 +12,43 @@ const props = {
 }
 ---
 
-<main class="w-screen flex">
+<main class="w-screen flex bg-white bg-opacity-70 backdrop-blur-md">
   <section 
-  class="w-2/4 h-screen">
+  class="w-2/4 h-[90vh] p-[5%] flex flex-col items-start justify-center gap-8">
     <h1 
-      class="text-4xl">
+      class="text-5xl font-black leading-tight w-[85%]">
         Obtén tu tajeta de crédito con nosotros
     </h1>
-    <a href="">
-      Obtener mi tarjeta
+    <a href="/approvalForm" class="bg-violet-400 text-violet-50 py-2 px-5 rounded-lg w-fit h-fit">
+      Obtener tarjeta
     </a>
   </section>
   <section
-  class="w-2/4 h-screen">
-  <CreditCard 
+  class="w-2/4 h-[90vh] flex items-center justify-center relative">
+  <div class="bg-violet-600 w-[20vw] h-[20vw] rounded-full absolute -z-20 blur-[20px]"></div>
+    <CreditCard
       backgroundSvg="background1.svg"
-      backgroundTransparency="0.7"
       franchise="MasterCardLogo.svg"
       cardNumber="1234 5678 9012 3456"
       cardholderName="John Doe"
       expirationDate="12/34"
-      blurEffect={false}
+      extraclass="w-[45%] absolute translate-x-[25%] translate-y-[25%] rotate-[10deg] opacity-95"
     />
-    
     <CreditCard 
       backgroundSvg="background3.svg"
-      backgroundTransparency="0.5"
       franchise="VisaLogo.svg"
       cardNumber="9876 5432 1098 7654"
       cardholderName="Jane Smith"
       expirationDate="11/33"
-      blurEffect={false}
+      extraclass="w-[45%] absolute -rotate-[30deg] -translate-x-[60%] -translate-y-[-45%] opacity-90"
     />
-    
     <CreditCard 
       backgroundSvg="background2.svg"
-      backgroundTransparency="0.9"
       franchise="MasterCardLogo.svg"
       cardNumber="5678 1234 8765 4321"
       cardholderName="Alice Brown"
       expirationDate="10/32"
-      blurEffect={true}
+      extraclass="w-[45%] absolute -translate-y-[50%] -translate-x-[15%] -rotate-[5deg] opacity-100"
     />
   </section>
 </main>

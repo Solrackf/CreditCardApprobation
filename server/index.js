@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const usuarioRouter = require('./routes/users');
 
 var app = express();
-const port = 3000
+const PORT = 3000
 
 //conexion a bd
 connectDB();
@@ -19,7 +19,7 @@ app.use(cors());
 
 //ruta principal
 app.get('/', (req, res) => {
-    res.send('API CARD CREDITS');
+    res.send('API Credits Cards ');
   });
   
 
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.use('/usuarios', usuarioRouter);
 
 
-app.listen(port, () => {
-    console.log(`se desplego el servidor en el puerto 3001`)
+app.listen(PORT, () => {
+    console.log(`Se desplego el servidor en el puerto ${PORT}`)
   })
   

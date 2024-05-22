@@ -1,26 +1,11 @@
 const mongoose = require("mongoose");
 
-const CardsSchema = new mongoose.Schema({
-  cedulaUsuario: {
-    type: Number,
-    required: true,
-    ref: "Users",
-  },
-  numero: {
-    type: String,
-    required: true,
-  },
-  fechaExpiracion: {
-    type: String,
-    required: true,
-  },
-  franquicia: {
-    type: String,
-  },
-  cvv: {
-    type: Number,
-    required: true,
-  }
+const cardSchema = new mongoose.Schema({
+	cedulaUsuario: { type: String, required: true },
+	franquicia: { type: String, required: true },
+	numero: { type: String, required: true, unique: true },
+	fechaExpiracion: { type: String, required: true },
+	cvv: { type: String, required: true },
 });
 
-module.exports = mongoose.model("Cards", CardsSchema);
+module.exports = mongoose.model("Cards", cardSchema);

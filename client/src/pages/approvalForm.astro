@@ -1,8 +1,33 @@
 ---
-  import CreditForm from "../components/CreditForm.astro";
+  import CreditCard from "../components/CreditCard.astro";
+import CreditForm from "../components/CreditForm.astro";
   import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Solicitud De Tarjeta de Crédito">
-  <CreditForm/>
+  <main class="flex bg-white bg-opacity-70 h-screen overflow-hidden">
+    <section class="w-2/4">
+      <CreditForm/>
+    </section>
+    <section class="w-2/4 relative flex items-center justify-center">
+      <div class="w-[25vw] h-[25vw] bg-violet-700 rounded-full blur-[10vw] opacity-80"></div>
+      <img src="SecondLines.svg" alt="" class="w-[100%] absolute translate-x-[60%]">
+      <CreditCard
+        backgroundSvg=""
+        franchise="VisaLogo.svg"
+        cardNumber="4532 1234 5678 9012"
+        cardholderName="Michael Johnson"
+        expirationDate="09/36"
+        extraclass="transparentWhite w-[45%] absolute -translate-x-[60%] translate-y-[45%]  backdrop-blur-[1rem] border skew-y-12"
+      />
+      <CreditCard
+        backgroundSvg=""
+        franchise="MasterCardLogo.svg"
+        cardNumber="5404 1234 5678 9013"
+        cardholderName="Patricia Taylor"
+        expirationDate="08/34"
+        extraclass="transparentWhite w-[45%] absolute translate-x-[20%] -translate-y-[55%]  backdrop-blur-[1rem] border -skew-y-[25deg]"
+      />
+    </section>
+  </main>
 </Layout>
