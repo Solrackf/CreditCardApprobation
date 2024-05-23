@@ -1,92 +1,165 @@
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    const salarioMensualInput = document.getElementById('salarioMensual');
-    const otrosIngresosInput = document.getElementById('otrosIngresos');
-    const ingresosTotalesInput = document.getElementById('ingresosTotales');
+---
+import Loader from "./Loader.astro";
+import CreditCardFailed from "./CreditCardFailed.astro";
+import CreditCard from "./CreditCard.astro";
+CreditCard
+---
 
-    const updateTotalIncome = () => {
-      const salarioMensual = parseFloat(salarioMensualInput.value) || 0;
-      const otrosIngresos = parseFloat(otrosIngresosInput.value) || 0;
-      const ingresosTotales = salarioMensual + otrosIngresos;
-      ingresosTotalesInput.value = ingresosTotales.toFixed(2);
-    };
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch('http://localhost:3000/usuarios/save', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-          throw new Error('Error en la solicitud: ' + response.statusText);
-        }
-
-        const result = await response.json();
-        console.log(result);
-      } catch (error) {
-        console.error('Error en la solicitud:', error.message, error);
-      }
-    });
-
-    salarioMensualInput.addEventListener('input', updateTotalIncome);
-    otrosIngresosInput.addEventListener('input', updateTotalIncome);
-  });
-</script>
-
-<div class="p-8 bg-white">
-  <form class=" flex-wrap ">
-    <label>
+<div id="CreditForm" class="w-[80%] h-screen px-[10%] p-8 transparentWhite2 flex flex-col items-start justify-center gap-5">
+  <form class="flex flex-wrap w-full gap-3 gap-x-4 justify-between">
+    <h2 class="text-violet-950 font-black text-3xl mb-4">Solicita tu tarjeta</h2>
+    <label class="w-full">
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Nombre completo
+      </span>
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="nombreCompleto" placeholder="Ingresa tu nombre completo" autocomplete="off" required />
+    </label>
+    <label class="w-full">
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Correo
+      </span>
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="correo" placeholder="Ingresa tu correo electrónico" autocomplete="off" required />
+    </label>
+    <label class="w-[36%]">
       <span class="block text-gray-700 text-sm font-extrabold">
         Cédula
       </span>
-      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="cedula" required />
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="cedula" placeholder="Ingresa tu cédula" autocomplete="off" required />
+    </label>
+    <label class="w-[58%]">
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Número de celular
+      </span>
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="numeroCelular" placeholder="Ingresa tu número de celular" autocomplete="off" required />
+    </label>
+    <label class="w-[46%]">
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Salario mensual
+      </span>
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" id="salarioMensual" name="salarioMensual" placeholder="Ingresa tu salario mensual" autocomplete="off" required />
+    </label>
+    <label class="w-[46%]">
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Otros ingresos
+      </span>
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" id="otrosIngresos" name="otrosIngresos" placeholder="Ingresa tus otros ingresos" autocomplete="off" required />
     </label>
     <label>
-      <span>
-        Nombre completo
+      <span class="block text-gray-700 text-sm font-extrabold">
+        Ingresos totales
       </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="text" name="nombreCompleto" required />
+      <input class="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " type="number" id="ingresosTotales" name="ingresosTotales" placeholder="Tus ingresos totales" autocomplete="off" required readonly />
     </label>
-    <label>
-      <span>
-        Correo:
-      </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="email" name="correo" required />
-    </label>
-    <label>
-      <span>
-        Número de celular:
-      </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="text" name="numeroCelular" required />
-    </label>
-    <label>
-      <span>
-        Salario mensual:
-      </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="number" id="salarioMensual" name="salarioMensual" required />
-    </label>
-    <label>
-      <span>
-        Otros ingresos:
-      </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="number" id="otrosIngresos" name="otrosIngresos" required />
-    </label>
-    <label>
-      <span>
-        Ingresos totales:
-      </span>
-      <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400" type="number" id="ingresosTotales" name="ingresosTotales" required readonly />
-    </label>
-    <button class="bg-purple-800 hover:bg-purple-950" type="submit">Enviar</button>
-    <a href="/">Regresar</a>
+    <div class="my-6 w-full">
+      <button class="py-2 px-7 text-violet-50 rounded bg-violet-800 hover:bg-violet-950" type="submit">Enviar</button>
+      <a href="/" class="hover:text-violet-600 hover:underline mx-4">Regresar</a>
+    </div>
   </form>
-</div>
+  <div id="loaderContainer" class="hidden w-full flex items-center justify-center ">
+    <Loader/>
+  </div>
+  <div id="responseMessagefailed" class="hidden my-5 w-full">
+    <CreditCardFailed/>
+  </div>
+  </div>
+  
+  <script>
+    var datos
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      const salarioMensualInput = document.getElementById('salarioMensual');
+      const otrosIngresosInput = document.getElementById('otrosIngresos');
+      const ingresosTotalesInput = document.getElementById('ingresosTotales');
+      const responseMessageFailed = document.getElementById('responseMessagefailed');
+      const loaderContainer = document.getElementById('loaderContainer');
+      const CreditForm = document.getElementById('CreditForm');
+  
+  
+      const updateTotalIncome = () => {
+        const salarioMensual = parseFloat(salarioMensualInput.value) || 0;
+        const otrosIngresos = parseFloat(otrosIngresosInput.value) || 0;
+        const ingresosTotales = salarioMensual + otrosIngresos;
+        ingresosTotalesInput.value = ingresosTotales.toFixed(2);
+      };
+  
+      form.addEventListener('submit', async (event) => {
+        loaderContainer.classList.remove('hidden')
+        event.preventDefault();
+        form.remove()
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+  
+        try {
+          setTimeout(() => {}, 2000);
+          loaderContainer.classList.remove('hidden')
+          const response = await fetch('http://localhost:3000/usuarios/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          
+          if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.statusText);
+          }
+  
+          const result = await response.json();
+          console.log(result);
+          console.log(JSON.stringify(result));
+          datos= JSON.stringify(result)
+          
+          const nombreCompleto = result.nombreCompleto
+          const franquicia = result.card.franquicia;
+          const numero = result.card.numero;
+          const numeroConEspacios = numero.replace(/(.{4})/g, '$1 ')
+          const cvv = result.card.cvv;
+          const fechaExpiracion = result.card.fechaExpiracion;
+
+          let logoFranquicia
+          if (franquicia === 'visa') {
+            logoFranquicia = "VisaLogo.svg"
+          } else if (franquicia === 'mastercard') {
+            logoFranquicia = "MasterCardLogo.svg"
+          }
+
+
+          CreditForm.innerHTML = `
+        <div class="w-full p-6 flex flex-col items-center justify-between aspect-[1.586/1] h-fit rounded-xl overflow-hidden" style="background: url('background1.svg') no-repeat center/cover;">
+          <section class="flex items-center justify-start w-full h-[50%] pb-7">
+            <img src="LessContactIcon.svg" class="h-6" alt="">
+          </section>
+          <section class="flex items-center justify-start w-full h-1/5 ">
+            <p class="text-xl text-violet-50">${numeroConEspacios}</p>
+          </section>
+          <section class="flex items-center justify-between w-full h-1/4 ">
+            <img src="${logoFranquicia}" alt="Franchise" class="h-9" />
+            <div class="flex flex-col items-end justify-center">
+              <p class="text-lg uppercase text-violet-50">${nombreCompleto}</p>
+              <p class="text-lg text-violet-50"><span class="font-extrabold text-violet-200">Exp:</span> ${fechaExpiracion}</p>
+            </div>
+          </section>
+        </div>
+`;
+
+          
+        } catch (error) {
+          console.error('Error en la solicitud:', error.message, error);
+          CreditForm.innerHTML = `
+            <a href="/" class="transparentWhite2 w-full h-fit p-[10%] aspect-[17/11] rounded-xl flex items-center justify-center flex-col gap-4 border border-red-200 hover:bg-red-100">
+              <img src="exclamation.svg" alt="" class="w-[20%] aspect-square">
+              <h1 class="text-red-400 text-center ">Lo lamentamos, pero, no eres apto para nuestras tarjetas de crédito</h1>
+            </a>
+          `
+        }
+        
+
+      });
+
+      salarioMensualInput.addEventListener('input', updateTotalIncome);
+      otrosIngresosInput.addEventListener('input', updateTotalIncome);
+      
+      console.log(datos);
+    });
+</script>
